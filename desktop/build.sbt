@@ -1,4 +1,4 @@
-forkInRun := true
+fork in run := true
 
 libraryDependencies ++= Seq(
   "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % LibgdxBuild.libgdxVersion,

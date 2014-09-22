@@ -10,6 +10,5 @@ Run the application on your computer using `activator desktop/run`.
 
 # TODO
 * Implement Android project generation
-* Add assembly
 * Add some way to include assets
 * Address LWJGL issues after desktop/run

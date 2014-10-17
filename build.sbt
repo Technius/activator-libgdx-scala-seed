@@ -17,3 +17,7 @@ lazy val desktop = Project("desktop", file("desktop")) settings(name := projectN
 libraryDependencies ++= Seq(
   "com.badlogicgames.gdx" % "gdx" % LibgdxBuild.libgdxVersion
 )
+
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+
+scalacOptions += "-target:jvm-1.7"

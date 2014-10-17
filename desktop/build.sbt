@@ -1,4 +1,6 @@
-import AssemblyKeys._
+import com.typesafe.sbt.SbtNativePackager._
+
+import NativePackagerKeys._
 
 fork in run := true
 
@@ -7,7 +9,4 @@ libraryDependencies ++= Seq(
   "com.badlogicgames.gdx" % "gdx-platform" % LibgdxBuild.libgdxVersion classifier "natives-desktop"
 )
 
-assemblySettings
-
-// Uncomment to set a name for the assembled jar
-// jarName in assembly := "name.jar"
+packageArchetype.java_application

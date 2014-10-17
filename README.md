@@ -4,11 +4,14 @@ This is a Typesafe Activator seed that generates a barebones [libGDX](http://lib
 This is currently a work-in-progress.
 
 # Usage
-Generate the project files by using `activator eclipse`.
+Generate Eclipse project files using `activator eclipse`.
 
 Run the application on your computer using `activator desktop/run`.
 
+Create a zip file for the desktop build using `activator desktop/universal:packageBin`.
+
 # TODO
 * Implement Android project generation
-* Add some way to include assets
+* Improve asset handling
+* Fix the line ending problems
 * Address LWJGL issues after desktop/run

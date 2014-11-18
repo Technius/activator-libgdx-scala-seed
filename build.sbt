@@ -4,7 +4,15 @@ name := projectName
 
 version := "1.0"
 
-scalaVersion := "2.11.2"
+scalaVersion in ThisBuild := "2.11.2"
+
+libraryDependencies in ThisBuild ++= Seq(
+  "com.badlogicgames.gdx" % "gdx" % LibgdxBuild.libgdxVersion
+)
+
+javacOptions in ThisBuild ++= Seq("-source", "1.7", "-target", "1.7")
+
+scalacOptions in ThisBuild += "-target:jvm-1.7"
 
 lazy val root = project in file(".") aggregate(android, desktop)
 
@@ -13,11 +21,3 @@ lazy val core = Project("core", file("core")) settings(name := projectName + "-c
 lazy val android = Project("android", file("android")) settings(name := projectName + "-android") dependsOn core
 
 lazy val desktop = Project("desktop", file("desktop")) settings(name := projectName + "-desktop") dependsOn core
-
-libraryDependencies ++= Seq(
-  "com.badlogicgames.gdx" % "gdx" % LibgdxBuild.libgdxVersion
-)
-
-javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
-
-scalacOptions += "-target:jvm-1.7"

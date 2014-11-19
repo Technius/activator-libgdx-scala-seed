@@ -6,7 +6,7 @@ This is currently a work-in-progress.
 # Usage
 Use Typesafe Activator to create a project based on this template. Edit the project name in `build.sbt`.
 
-Put all the needed assets in `core/src/main/resources`.
+Put all the needed assets in `assets`. View `assets/README.md` for help regarding assets.
 
 * Generate Eclipse project files with `activator eclipse`.
 * Run the application on your computer using `activator desktop/run`.
@@ -14,6 +14,6 @@ Put all the needed assets in `core/src/main/resources`.
 
 # TODO
 * Implement Android project generation
-* Improve asset handling
 * Fix the line ending problems
 * Address LWJGL issues after desktop/run
+* Add incremental compilation support if possible

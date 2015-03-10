@@ -1,39 +1,35 @@
-import com.typesafe.sbt.SbtNativePackager._
-
-import NativePackagerKeys._
-
 val projectName = """libgdx-scala-seed"""
 
 name := projectName
 
-version := "1.0"
+version := "1.0.0"
 
-scalaVersion in ThisBuild := "2.11.2"
+scalaVersion in ThisBuild := "2.11.6"
 
-libraryDependencies in ThisBuild ++= Seq(
-  "com.badlogicgames.gdx" % "gdx" % LibgdxBuild.libgdxVersion
-)
+lazy val root = Project("root", file("."))
+  .aggregate(android, desktop)
 
-javacOptions in ThisBuild ++= Seq("-source", "1.7", "-target", "1.7")
+lazy val core = Project("core", file("core"))
+  .settings(
+    name := projectName + "-core",
+    libraryDependencies += libGdx
+  )
 
-scalacOptions in ThisBuild += "-target:jvm-1.7"
+lazy val android = Project("android", file("android"))
+  .settings(name := projectName + "-android")
+  .dependsOn(core)
 
-lazy val root = project in file(".") aggregate(android, desktop)
+lazy val desktop = Project("desktop", file("desktop"))
+  .settings(
+    name := projectName + "-desktop",
+    watchSources <++= sources in (core, Compile)
+  )
+  .dependsOn(core)
+  .enablePlugins(LibGdxDesktop)
 
-lazy val core = Project("core", file("core")) settings(name := projectName + "-core")
+javacOptions in Global ++= Seq("-source", "1.7", "-target", "1.7")
 
-lazy val android = Project("android", file("android")) settings(name := projectName + "-android") dependsOn core
-
-lazy val desktop = Project("desktop", file("desktop")) settings(name := projectName + "-desktop") dependsOn core
-
-unmanagedResourceDirectories in (desktop, Compile) += baseDirectory.value / "assets"
-
-mappings in (desktop, Compile, packageBin) ~= { _.filter(_._1.getName.endsWith(".class")) }
-
-mappings in Universal in desktop ++= {
-  val a = (baseDirectory.value / "assets").*** pair relativeTo(baseDirectory.value)
-  a map (t => (t._1, t._2.replaceFirst("assets", "bin")))
-}
+scalacOptions in Global += "-target:jvm-1.7"
 
 // Uncomment to generate a ".RUNNING_SBT" file when using desktop/run.
 // This file will contain the path of the project directory.

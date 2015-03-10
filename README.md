@@ -1,19 +1,11 @@
 # libGDX Scala Seed
-This is a Typesafe Activator seed that generates a barebones [libGDX](http://libgdx.badlogicgames.com/) project. The generated project uses Scala.
-
-This is currently a work-in-progress.
+This is a Typesafe Activator seed that generates a barebones
+[libGDX](http://libgdx.badlogicgames.com/) project. The generated project uses
+Scala and the sbt-libgdx plugin.
 
 # Usage
-Use Typesafe Activator to create a project based on this template. Edit the project name in `build.sbt`.
+Use Typesafe Activator to create a project based on this template. Edit the
+project name in `build.sbt`.
 
-Put all the needed assets in `assets`. View `assets/README.md` for help regarding assets.
-
-* Generate Eclipse project files with `activator eclipse`.
-* Run the application on your computer using `activator desktop/run`.
-* Create a zip file of the desktop build by running `activator desktop/universal:packageBin`.
-
-# TODO
-* Implement Android project generation
-* Fix the line ending problems
-* Address LWJGL issues after desktop/run
-* Add incremental compilation support if possible
+See the [sbt-libgdx](http://github.com/Technius/sbt-libgdx) plugin for
+configuration options and commands.

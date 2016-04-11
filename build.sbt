@@ -2,34 +2,42 @@ val projectName = """libgdx-scala-seed"""
 
 name := projectName
 
-version := "1.0.0"
-
-scalaVersion in ThisBuild := "2.11.6"
+val sharedSettings = Seq(
+  scalaVersion := "2.11.8",
+  libGdxVersion := "1.9.2",
+  version := "1.0.0",
+  javacOptions ++= Seq("-source", "1.7", "-target", "1.7"),
+  scalacOptions ++= Seq("-target:jvm-1.7", "-deprecation", "-feature")
+)
 
 lazy val root = Project("root", file("."))
   .aggregate(android, desktop)
 
 lazy val core = Project("core", file("core"))
+  .settings(sharedSettings: _*)
   .settings(
     name := projectName + "-core",
-    libraryDependencies += libGdx
+    libraryDependencies += libGdx.value,
+    exportJars := true
   )
 
 lazy val android = Project("android", file("android"))
-  .settings(name := projectName + "-android")
+  .settings(sharedSettings: _*)
+  .settings(
+    name := projectName + "-android",
+    platformTarget in Android := "android-23"
+  )
   .dependsOn(core)
+  .enablePlugins(LibGdxAndroid)
 
 lazy val desktop = Project("desktop", file("desktop"))
+  .settings(sharedSettings: _*)
   .settings(
     name := projectName + "-desktop",
     watchSources <++= sources in (core, Compile)
   )
   .dependsOn(core)
   .enablePlugins(LibGdxDesktop)
-
-javacOptions in Global ++= Seq("-source", "1.7", "-target", "1.7")
-
-scalacOptions in Global += "-target:jvm-1.7"
 
 // Uncomment to generate a ".RUNNING_SBT" file when using desktop/run.
 // This file will contain the path of the project directory.

@@ -7,3 +7,10 @@
 /core/target/
 /desktop/target/
 /android/target/
+
+.project
+.classpath
+*.swp
+.DS_Store
+*.class
+.settings

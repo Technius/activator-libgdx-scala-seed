@@ -2,8 +2,9 @@ val projectName = """libgdx-scala-seed"""
 
 name := projectName
 
+scalaVersion in ThisBuild := "2.11.8"
+
 val sharedSettings = Seq(
-  scalaVersion := "2.11.8",
   libGdxVersion := "1.9.2",
   version := "1.0.0",
   javacOptions ++= Seq("-source", "1.7", "-target", "1.7"),
